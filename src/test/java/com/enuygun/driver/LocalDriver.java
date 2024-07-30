@@ -52,7 +52,7 @@ public class LocalDriver {
         capabilities.setCapability("appPackage", "com.mobilatolye.android.enuygun");
         capabilities.setCapability("appActivity", " com.mobilatolye.android.enuygun.MainActivity");
         capabilities.setCapability("automationName", "UiAutomator2");
-        capabilities.setCapability("app", "/Users/ozcan.arpaci/IdeaProjects/gauge-mobile-project/apps/android/com.mobilatolye.android.enuygun.apk"); // Uygulamanın doğru yolunu belirtin.
+        capabilities.setCapability("app", "androidApkPath"); // Uygulamanın doğru yolunu belirtin.
 
         try {
             return new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
