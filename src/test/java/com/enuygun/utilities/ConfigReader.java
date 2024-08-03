@@ -9,17 +9,17 @@ public class ConfigReader {
     private static Properties properties;
 
 
-    public String getProperty(String propertyName) {
+    public static String getProperty(String propertyName) {
         if (properties == null) {
             loadProperties();
         }
         return properties.getProperty(propertyName);
     }
 
-    private void loadProperties() {
+    private static void loadProperties() {
         properties = new Properties();
 
-        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("application.properties")) {
+        try (InputStream inputStream = ConfigReader.class.getClassLoader().getResourceAsStream("application.properties")) {
             if (inputStream != null) {
                 properties.load(inputStream);
             } else {

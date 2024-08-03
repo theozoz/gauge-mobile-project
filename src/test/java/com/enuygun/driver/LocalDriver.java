@@ -1,5 +1,6 @@
 package com.enuygun.driver;
 
+import com.enuygun.utilities.ConfigReader;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
@@ -13,30 +14,26 @@ import java.net.URL;
 public class LocalDriver {
 
 
+    private static final DesiredCapabilities capabilities = new DesiredCapabilities();
+    static AppiumDriver driver;
 
-    public static WebDriver getDriver(String platformName) {
-        AppiumDriver driver = null;
-        switch (platformName) {
-            case "Android":
-                driver = getAndroidDriver();
-                break;
-            case "iOS":
-                driver = getIOSDriver();
-                break;
-        }
+    public static AppiumDriver getDriver(String platformName) {
+         driver = switch (platformName.toLowerCase()) {
+            case "android" -> getAndroidDriver();
+            case "ios" -> getIOSDriver();
+            default -> null;
+        };
 
         return driver;
     }
 
     private static IOSDriver getIOSDriver() {
-        DesiredCapabilities capabilities = new DesiredCapabilities();
 
-        capabilities.setCapability("platformName", "ios");
-        capabilities.setCapability("platformVersion", "17.5");
-        capabilities.setCapability("deviceName", "iPhone 15 Pro Max");
-        capabilities.setCapability("app", "/Users/ozcan.arpaci/IdeaProjects/hotel-mobile/apps/ios/ENUYGUN.app");
-        capabilities.setCapability("automationName", "XCUITest");
-        //capabilities.setCapability("udid", "07DC555C-3728-4079-9C19-01E8B8954040");
+        capabilities.setCapability("appium:platformName", "ios");
+        capabilities.setCapability("appium:platformVersion", ConfigReader.getProperty("iosPlatformVersion"));
+        capabilities.setCapability("appium:deviceName", ConfigReader.getProperty("iosDeviceName"));
+        capabilities.setCapability("appium:app", ConfigReader.getProperty("iosAppPath"));
+        capabilities.setCapability("appium:automationName", "XCUITest");
         try {
             return new IOSDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
         } catch (MalformedURLException e) {
@@ -47,12 +44,12 @@ public class LocalDriver {
     private static AndroidDriver getAndroidDriver() {
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("platformName", MobilePlatform.ANDROID);
-        capabilities.setCapability("deviceName", "emulator-5554");
-        capabilities.setCapability("appPackage", "com.mobilatolye.android.enuygun");
-        capabilities.setCapability("appActivity", " com.mobilatolye.android.enuygun.MainActivity");
-        capabilities.setCapability("automationName", "UiAutomator2");
-        capabilities.setCapability("app", "androidApkPath"); // Uygulamanın doğru yolunu belirtin.
+        capabilities.setCapability("appium:platformName", "android");
+        capabilities.setCapability("appium:deviceName", ConfigReader.getProperty("androidDeviceName"));
+        capabilities.setCapability("appium:appPackage", ConfigReader.getProperty("appPackage"));
+        capabilities.setCapability("appium:appActivity", ConfigReader.getProperty("appActivity"));
+        capabilities.setCapability("appium:automationName", "UiAutomator2");
+        capabilities.setCapability("appium:app", ConfigReader.getProperty("androidApkPath"));
 
         try {
             return new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);

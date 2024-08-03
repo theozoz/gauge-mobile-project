@@ -1,26 +1,29 @@
 package com.enuygun.utilities;
 
 import com.enuygun.model.Element;
+import io.appium.java_client.AppiumBy;
 import org.openqa.selenium.By;
 
 public class ElementType {
+    public static By getBy(Element element, String platform) {
+        String type = element.getType(platform);
+        String value = element.getValue(platform);
 
-    ElementType() {
-    }
-
-    public static By elementType(Element element) {
-        return switch (element.getType()) {
-            case "css" -> By.cssSelector(element.getValue());
-            case "xpath" -> By.xpath(element.getValue());
-            case "id" -> By.id(element.getValue());
-            case "name" -> By.name(element.getValue());
-            case "class" -> By.className(element.getValue());
-            case "link" -> By.linkText(element.getValue());
-            case "partialLink" -> By.partialLinkText(element.getValue());
-            case "tagName" -> By.tagName(element.getValue());
-            case "data-testid" -> By.cssSelector("[data-testid='" + element.getValue() + "']");
-            default -> throw new IllegalArgumentException("Invalid type: " + element.getType());
+        return switch (type) {
+            case "css" -> By.cssSelector(value);
+            case "xpath" -> By.xpath(value);
+            case "id" -> By.id(value);
+            case "name" -> By.name(value);
+            case "class" -> By.className(value);
+            case "link" -> By.linkText(value);
+            case "partialLink" -> By.partialLinkText(value);
+            case "tagName" -> By.tagName(value);
+            case "classChain" -> AppiumBy.iOSClassChain(value);
+            case "predicateString" -> AppiumBy.iOSNsPredicateString(value);
+            case "accessibilityId" -> By.xpath(platform.equalsIgnoreCase("android")
+                    ? "//*[@content-desc='" + value + "']"
+                    : "//*[@name='" + value + "']");
+            default -> throw new IllegalArgumentException("Invalid type: " + type);
         };
     }
-
 }

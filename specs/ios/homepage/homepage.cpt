@@ -1,0 +1,30 @@
+Created by ozcan.arpaci on 2.08.2024
+
+This is a concept file with following syntax for each concept.
+# Bildirim kapatılır
+* Alerti kabul et
+
+# Splach ekranı kapalır
+* Elemente "splashScreenCloseBtn" tıkla
+
+# Login ekranı kapatılır
+* Elemente "loginCloseBtn" tıkla
+
+# Otel ana sayfa açılır
+* Elemente "homeHotelTabBtn" basılır
+
+# Otel rezervasyon yeri için <cityName> seçilir
+* Elemente "hotelSearchLocationName" basılır
+* Elemente "hotelSearchLocationInput" text <cityName> değerini yaz
+* Elemente "hotelSearchLocationResultFirsCell" tıkla
+
+# Giriş tarihi <checkInDay> gün sonra ve çıkış tarihi <checkOutDay> gün sonra olarak seçilir
+* Elemente "hotelCheckInDay" basılır
+* Text <checkInDay> değerini içeren element "hotelPickerActiveDay" görünene kadar "5" kaydır
+* Text <checkInDay> değerini içeren elemente "hotelPickerActiveDay" tıkla
+* Text <checkOutDay> değerini içeren element "hotelPickerActiveDay" görünene kadar "5" kaydır
+* Text <checkOutDay> değerini içeren elemente "hotelPickerActiveDay" tıkla
+* Elemente "hotelPickerSubmitBtn" tıkla
+
+# Otel arama butonuna tıklanır
+* Elemente "hotelSearchBtn" tıkla

@@ -4,13 +4,13 @@ import com.enuygun.utilities.ConfigReader;
 import com.thoughtworks.gauge.AfterScenario;
 import com.thoughtworks.gauge.BeforeScenario;
 import com.thoughtworks.gauge.BeforeSuite;
+import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.WebDriver;
 
 public class BaseDriver {
-    public static WebDriver driver;
-    public static ConfigReader configReader = new ConfigReader();
-    public static boolean isRemoteDriver = Boolean.parseBoolean(configReader.getProperty("isRemoteDriver"));
-    public static String platformName = configReader.getProperty("platformName");
+    public static AppiumDriver driver;
+    public static boolean isRemoteDriver = Boolean.parseBoolean(ConfigReader.getProperty("isRemoteDriver"));
+    public static String platformName = ConfigReader.getProperty("platformName");
 
     @BeforeSuite
     public void setUp() {

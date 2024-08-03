@@ -1,76 +1,52 @@
 package com.enuygun.utilities;
-
 import com.enuygun.model.Element;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
-import com.thoughtworks.gauge.Logger;
 import org.openqa.selenium.By;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 public class ElementJsonReader {
+    private static final String DEFAULT_DIRECTORY_PATH = ConfigReader.getProperty("elementJsonPath");
+    private static final String PLATFORM_NAME = ConfigReader.getProperty("platformName");
+    private static final Map<String, Element> elementCache = new ConcurrentHashMap<>();
 
-    public static ConfigReader configReader = new ConfigReader();
+    public static By findElementFromJsonFiles(String elementKey) {
+        Element element = elementCache.computeIfAbsent(elementKey, ElementJsonReader::loadElement);
+        if (element == null) {
+            throw new RuntimeException("Element not found: " + elementKey);
+        }
+        return ElementType.getBy(element, PLATFORM_NAME);
+    }
 
-    private static final String DEFAULT_DIRECTORY_PATH = configReader.getProperty("elementJsonPath");
+    private static Element loadElement(String elementKey) {
+        return getJsonFilesFromFolder().parallelStream()
+                .flatMap(file -> parseJsonFile(file).stream())
+                .filter(element -> element.getKey().equals(elementKey))
+                .findFirst()
+                .orElse(null);
+    }
 
-
-    public List<File> getJsonFilesFromFolder() {
-        List<File> files = new ArrayList<>();
+    private static List<File> getJsonFilesFromFolder() {
         File folder = new File(DEFAULT_DIRECTORY_PATH);
-        if (folder.exists()) {
-            File[] fileList = folder.listFiles();
-            if (fileList != null) {
-                for (File file : fileList) {
-                    if (file.getName().endsWith(".json")) {
-                        files.add(file);
-                    }
-                }
-            }
+        File[] files = folder.listFiles((dir, name) -> name.toLowerCase().endsWith(".json"));
+        if (files == null) {
+            throw new RuntimeException("No JSON files found in the specified directory");
         }
-        return files;
+        return List.of(files);
     }
 
-    public By findElementFromJsonFiles(String elementKey) {
-        List<File> files = getJsonFilesFromFolder();
-        List<Element> elements;
-        By by = null;
-        int count = 0;
-
-        for (File file : files) {
-            Gson gson = new Gson();
-            try {
-                elements = gson.fromJson(new FileReader(file), new TypeToken<List<Element>>() {
-                }.getType());
-                for (Element element : elements) {
-
-                    if (element.getKey().equals(elementKey)) {
-                        count++;
-                    }
-                    if (element.getKey().equals(elementKey)) {
-                        by = ElementType.elementType(element);
-                    }
-                }
-            } catch (FileNotFoundException e) {
-                throw new RuntimeException(e);
-            }
-
+    private static List<Element> parseJsonFile(File file) {
+        try (FileReader reader = new FileReader(file)) {
+            return new Gson().fromJson(reader, new TypeToken<List<Element>>() {}.getType());
+        } catch (IOException e) {
+            throw new RuntimeException("Error reading JSON file: " + file.getName(), e);
         }
-        if (by == null) {
-            Logger.error("Element is not found "+ elementKey);
-            throw new RuntimeException("Element is not found");
-        } else {
-            if (count > 1) {
-                throw new RuntimeException("Element is duplicated");
-            } else {
-                return by;
-            }
-        }
-
     }
-
 }

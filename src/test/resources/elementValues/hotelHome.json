@@ -1,0 +1,72 @@
+[
+  {
+    "key": "splashScreenCloseBtn",
+    "androidValue": "",
+    "androidType": "",
+    "iosValue": "btnClose",
+    "iosType": "accessibilityId"
+  },
+  {
+    "key": "loginCloseBtn",
+    "androidValue": "",
+    "androidType": "",
+    "iosValue": "txtClose",
+    "iosType": "accessibilityId"
+  },
+  {
+    "key": "homeHotelTabBtn",
+    "androidValue": "",
+    "androidType": "",
+    "iosValue": "Otel",
+    "iosType": "accessibilityId"
+  },
+  {
+    "key": "hotelSearchLocationName",
+    "androidValue": "",
+    "androidType": "",
+    "iosValue": "hotel_search_location_name",
+    "iosType": "accessibilityId"
+  },
+  {
+    "key": "hotelSearchLocationInput",
+    "androidValue": "",
+    "androidType": "",
+    "iosValue": "hotel_location_search_text",
+    "iosType": "accessibilityId"
+  },
+  {
+    "key": "hotelSearchLocationResultFirsCell",
+    "androidValue": "",
+    "androidType": "",
+    "iosValue": "**/XCUIElementTypeCell[`name == \"hotel_location_search_result_cell\"`][1]",
+    "iosType": "classChain"
+  },
+  {
+    "key": "hotelCheckInDay",
+    "androidValue": "",
+    "androidType": "",
+    "iosValue": "hotel_search_checkin_day",
+    "iosType": "accessibilityId"
+  },
+  {
+    "key": "hotelPickerActiveDay",
+    "androidValue": "",
+    "androidType": "",
+    "iosValue": " //XCUIElementTypeOther[@name=\"activeDepartureDay = %s\"]/XCUIElementTypeOther",
+    "iosType": "xpath"
+  },
+  {
+    "key": "hotelPickerSubmitBtn",
+    "androidValue": "",
+    "androidType": "",
+    "iosValue": "Tamam",
+    "iosType": "accessibilityId"
+  },
+  {
+    "key": "hotelSearchBtn",
+    "androidValue": "",
+    "androidType": "",
+    "iosValue": "hotel_search_search_rooms",
+    "iosType": "accessibilityId"
+  }
+]

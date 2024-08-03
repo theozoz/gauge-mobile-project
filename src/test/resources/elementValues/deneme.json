@@ -1,0 +1,51 @@
+[
+  {
+    "key": "otobusTabBtn",
+    "androidValue": "",
+    "androidType": "",
+    "iosValue": "Otobüs",
+    "iosType": "accessibilityId"
+  },
+  {
+    "key": "otobusNereden",
+    "androidValue": "",
+    "androidType": "",
+    "iosValue": "bus_search_departure_label",
+    "iosType": "accessibilityId"
+  },
+  {
+    "key": "otobusNereye",
+    "androidValue": "",
+    "androidType": "",
+    "iosValue": "bus_search_landing_label",
+    "iosType": "accessibilityId"
+  },
+  {
+    "key": "otobusNeredenFirstLabel",
+    "androidValue": "",
+    "androidType": "",
+    "iosValue": "**/XCUIElementTypeStaticText[`name == \"İstanbul Avrupa\"`]",
+    "iosType": "classChain"
+  },
+  {
+    "key": "otobusNereyeFirstLabel",
+    "androidValue": "",
+    "androidType": "",
+    "iosValue": "Ankara",
+    "iosType": "accessibilityId"
+  },
+  {
+    "key": "otobusArama",
+    "androidValue": "",
+    "androidType": "",
+    "iosValue": "//XCUIElementTypeButton[@name=\"Otobüs Bileti Arama Butonu\"]",
+    "iosType": "xpath"
+  },
+  {
+    "key": "otobuslistelemeIkinciEleman",
+    "androidValue": "",
+    "androidType": "",
+    "iosValue": "(//XCUIElementTypeCell[contains(@name,'bus_search_cell')])[2]",
+    "iosType": "xpath"
+  }
+]

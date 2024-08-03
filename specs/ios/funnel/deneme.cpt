@@ -1,0 +1,20 @@
+Created by ozcan.arpaci on 3.08.2024
+
+This is a concept file with following syntax for each concept.
+
+# Otobüs ana sayfa açılır
+* Elemente "otobusTabBtn" basılır
+
+# Otobüs için varış kalkış yeri seçilir
+* Elemente "otobusNereden" basılır
+* Elemente "otobusNeredenFirstLabel" tıkla
+* Elemente "otobusNereye" basılır
+* Elemente "otobusNereyeFirstLabel" tıkla
+
+# Otobüs araması yapılır
+* Elemente "otobusArama" tıkla
+
+# listelenen otobüs firmalarından birine tıklanır
+* Element "otobuslistelemeIkinciEleman" görünür olana kadar bekle
+* "5" defa aşağı kaydır
+* Elemente "otobuslistelemeIkinciEleman" tıkla

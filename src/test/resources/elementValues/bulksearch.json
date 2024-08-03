@@ -1,0 +1,10 @@
+[
+  {
+    "key": "bulkSearchFirstHotelName",
+    "androidValue": "",
+    "androidType": "",
+    "iosValue": "**/XCUIElementTypeStaticText[`name == \"hotel_search_result_cell_hotel_name\"`][1]",
+    "iosType": "classChain"
+  }
+]
+

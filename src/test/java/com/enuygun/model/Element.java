@@ -9,14 +9,17 @@ import lombok.Setter;
 @Setter
 public class Element {
     private String key;
-    private String value;
-    private String type;
+    private String androidValue;
+    private String androidType;
+    private String iosValue;
+    private String iosType;
 
-    public Element(String key, String value, String type) {
-        this.key = key;
-        this.value = value;
-        this.type = type;
+    public String getValue(String platform) {
+        return platform.equalsIgnoreCase("android") ? androidValue : iosValue;
     }
 
+    public String getType(String platform) {
+        return platform.equalsIgnoreCase("android") ? androidType : iosType;
+    }
 
 }

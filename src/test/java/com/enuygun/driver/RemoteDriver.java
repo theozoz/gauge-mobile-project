@@ -1,5 +1,6 @@
 package com.enuygun.driver;
 
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.ios.IOSDriver;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -12,7 +13,7 @@ public class RemoteDriver {
     public static DesiredCapabilities capabilities = new DesiredCapabilities();
 
 
-    public static WebDriver getDriver(String platformName) {
+    public static AppiumDriver getDriver(String platformName) {
         return null;
 
     }
